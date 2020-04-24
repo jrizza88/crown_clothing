@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const firebaseConfig = {
+const config = {
     apiKey: "AIzaSyD-tWn61_Ezc01HRXZg4lrBeU6KPSe8PvU",
     authDomain: "crown-clothing-db-59d30.firebaseapp.com",
     databaseURL: "https://crown-clothing-db-59d30.firebaseio.com",
@@ -13,7 +13,7 @@ const firebaseConfig = {
     measurementId: "G-C27SWSCWQ5"
   };
 
-  firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp(config)
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();

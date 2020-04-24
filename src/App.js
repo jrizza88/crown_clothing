@@ -5,8 +5,27 @@ import HomePage from "./Pages/HomePage/HomePage";
 import ShopPage from "./Pages/Shop/ShopPage";
 import SignInAndSignUpPage from './Pages/SignIn-and-SignUp/SignInAndSignUpPage';
 import Header from "./Components/Header/Header";
+import { auth } from './Firebase/firebase.utils';
 
-function App() {
+
+class App extends React.Component {
+
+  constructor(){
+    super();
+    this.state = {
+      currentUser: null
+    }
+  }
+
+  componentDidMount(){
+    auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user})
+
+      console.log('user: ', user)
+    })
+  }
+
+  render(){
   return (
     <div>
       <Header />
@@ -16,7 +35,9 @@ function App() {
         <Route path='/signin' component={SignInAndSignUpPage}/>
       </Switch>
     </div>
-  );
+    );
+  }
+    
 }
 
 export default App;
