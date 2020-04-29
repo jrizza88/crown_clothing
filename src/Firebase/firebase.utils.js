@@ -13,6 +13,30 @@ const config = {
     measurementId: "G-C27SWSCWQ5"
   };
 
+  export const createUserProfileDocument = async (userAuth, additionalData) => {
+    // if the userAuth object does not exist. 
+    if (!userAuth) return;
+    const userRef = firestore.doc(`users/${userAuth.uid}`)
+    const snapShot = await userRef.get()
+
+    console.log('snapshot: ', snapShot)
+    console.log('firestore: ', firestore.doc(`users/${userAuth.uid}`))
+
+    if(!snapShot.exists) {
+        const { displayName,  email } = userAuth;
+        // informs you when this was invoked
+        const createdAt = new Date()
+      try {
+        await userRef.set({
+          displayName, email, createdAt, ...additionalData
+        })
+      } catch (err) {
+        console.log('error creating user', err.message)
+      }
+    }
+    return snapShot
+  }
+
   firebase.initializeApp(config)
 
   export const auth = firebase.auth();
@@ -25,3 +49,7 @@ const config = {
   export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
   export default firebase;
+
+  // firestore.collection('users').doc('userspecificID').collection('cartItems').doc('cartItemsspecificID')
+  // firestore.doc('/users/docID/cartItems/cartItemsID')
+    // firestore.collection('/users/docID/cartItems/')
