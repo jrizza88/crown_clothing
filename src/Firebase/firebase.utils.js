@@ -13,11 +13,13 @@ const config = {
     measurementId: "G-C27SWSCWQ5"
   };
 
+  firebase.initializeApp(config)
+
   export const createUserProfileDocument = async (userAuth, additionalData) => {
     // if the userAuth object does not exist. 
     if (!userAuth) return;
-    const userRef = firestore.doc(`users/${userAuth.uid}`)
-    const snapShot = await userRef.get()
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
 
     console.log('snapshot: ', snapShot)
     console.log('firestore: ', firestore.doc(`users/${userAuth.uid}`))
@@ -29,15 +31,14 @@ const config = {
       try {
         await userRef.set({
           displayName, email, createdAt, ...additionalData
-        })
+        });
       } catch (err) {
         console.log('error creating user', err.message)
       }
     }
-    return snapShot
+    return userRef;
   }
 
-  firebase.initializeApp(config)
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
