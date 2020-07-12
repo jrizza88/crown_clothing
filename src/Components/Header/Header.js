@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// connect is a HOC to allow component to have access to redux
+import { connect } from 'react-redux';
 import { auth } from '../../Firebase/firebase.utils';
 
 
@@ -35,5 +37,9 @@ const Header = ({ currentUser }) => (
     </div>
 )
 
-export default Header;
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header);
 
