@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // connect is a HOC to allow component to have access to redux
 import { connect } from 'react-redux';
-import { auth } from '../../Firebase/firebase.utils';
 
+import { auth } from '../../Firebase/firebase.utils';
+import CartIcon from "../CartIcon/cart-icon";
 
 import './header.styles.scss';
 import {ReactComponent as Logo } from '../../Assets/original.svg';
@@ -32,6 +33,7 @@ const Header = ({ currentUser }) => (
                 </Link>
                 )
             }
+            <CartIcon />
 
         </div>
     </div>
