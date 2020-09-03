@@ -4,7 +4,7 @@ import CustomButton from '../CustomButton/CustomButton';
 import CartItem from "../CartItem/cart-item";
 import './cart-dropdown.styles.scss';
 
-const CartDropdown = () => (
+const CartDropdown = ({cartItems}) => (
 <div className="cart-dropdown">
     <div className='cart-items'>
     {cartItems.map(cartItem => (
@@ -16,7 +16,7 @@ const CartDropdown = () => (
 
 )
 
-const mstp = ({ cart: {cartItems } }) =? ({
+const mstp = ({ cart: {cartItems } }) => ({
     cartItems
 })
 
